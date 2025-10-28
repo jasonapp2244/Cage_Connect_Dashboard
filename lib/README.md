@@ -58,3 +58,4 @@ The app automatically detects screen size and adjusts the layout accordingly:
 ## Assets
 
 - `assets/images/login.png` - MMA cage background image
+

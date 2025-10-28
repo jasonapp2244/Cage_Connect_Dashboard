@@ -1,4 +1,4 @@
-import 'package:cageconnectdashboard/screens/responsive_login_screen.dart';
+import 'package:cageconnectdashboard/screens/view/responsive_support_view_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Cage Connect Dashboard',
       theme: ThemeData(primarySwatch: Colors.red, useMaterial3: true),
-      home: const ResponsiveLoginScreen(),
+      home: ResponsiveSupportViewScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
