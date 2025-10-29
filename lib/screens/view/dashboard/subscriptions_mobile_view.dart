@@ -418,7 +418,7 @@ class _ActionButtons extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xffED1C24),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
