@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class CustomSearchBar extends StatelessWidget {
   String? hintText;
   double? width;
+  Color? hintColor;
 
-  CustomSearchBar({super.key, this.hintText, this.width});
+  CustomSearchBar({super.key, this.hintText, this.width, this.hintColor});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,6 +24,8 @@ class CustomSearchBar extends StatelessWidget {
           Expanded(
             child: TextField(
               decoration: InputDecoration(
+                fillColor: hintColor ?? Colors.white,
+                filled: true,
                 hintText: hintText.toString(),
                 hintStyle: TextStyle(color: Color(0xff6C6C6C), fontSize: 14),
                 border: InputBorder.none,

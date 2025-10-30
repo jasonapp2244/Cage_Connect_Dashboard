@@ -5,7 +5,7 @@ class CustomFilterPill extends StatelessWidget {
   final String text;
   final bool isSelected;
 
-  const CustomFilterPill({required this.text, required this.isSelected});
+  const CustomFilterPill({super.key, required this.text, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {

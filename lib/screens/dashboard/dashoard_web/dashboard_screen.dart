@@ -1,14 +1,11 @@
 import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
-import 'package:cageconnectdashboard/source/user_signup_datagrid.dart';
 import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:cageconnectdashboard/widgets/custom_info_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-import '../../../controller/dashboard_provider.dart';
 
 class _CustomSearchBar extends StatelessWidget {
   const _CustomSearchBar();
@@ -325,7 +322,7 @@ class DashboardScreen extends StatefulWidget {
   // 🔹 FIX 1: Add a field for data and make it optional, as Widget.data isn't valid.
   final List<SignupData>? signupData;
 
-  const DashboardScreen({Key? key, this.signupData}) : super(key: key);
+  const DashboardScreen({super.key, this.signupData});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();

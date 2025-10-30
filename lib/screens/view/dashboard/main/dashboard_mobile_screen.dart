@@ -1,4 +1,3 @@
-import 'package:cageconnectdashboard/screens/reecent_signup_screen.dart';
 import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
 import 'package:cageconnectdashboard/widgets/custom_profile.dart';
 
@@ -10,7 +9,7 @@ import '../../../../utils/colors.dart';
 import '../../../../widgets/custom_info_widget.dart';
 
 class DashboardMobileScreen extends StatefulWidget {
-  const DashboardMobileScreen({Key? key}) : super(key: key);
+  const DashboardMobileScreen({super.key});
 
   @override
   State<DashboardMobileScreen> createState() => _DashboardMobileScreenState();
@@ -166,8 +165,9 @@ class _DashboardMobileScreenState extends State<DashboardMobileScreen> {
                     showTitles: true,
                     getTitlesWidget: (value, meta) {
                       final labels = ['Events', 'Fighters', 'Chats', 'Reviews'];
-                      if (value.toInt() >= labels.length)
+                      if (value.toInt() >= labels.length) {
                         return const SizedBox();
+                      }
                       return Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
@@ -249,8 +249,9 @@ class _DashboardMobileScreenState extends State<DashboardMobileScreen> {
                           'Nov',
                           'Dec',
                         ];
-                        if (value.toInt() >= months.length)
+                        if (value.toInt() >= months.length) {
                           return const SizedBox();
+                        }
                         return Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(

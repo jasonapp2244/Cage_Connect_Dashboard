@@ -6,7 +6,7 @@ class CustomHeaderCell extends StatelessWidget {
   final String? text;
   final double? width;
 
-  const CustomHeaderCell({this.text, this.width});
+  const CustomHeaderCell({super.key, this.text, this.width});
 
   @override
   Widget build(BuildContext context) {

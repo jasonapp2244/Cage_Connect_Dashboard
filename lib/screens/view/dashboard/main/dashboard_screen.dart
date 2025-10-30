@@ -11,7 +11,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 class DashboardScreen extends StatefulWidget {
   final List<SignupData>? signupData;
 
-  const DashboardScreen({Key? key, this.signupData}) : super(key: key);
+  const DashboardScreen({super.key, this.signupData});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -263,8 +263,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           'Nov',
                           'Dec',
                         ];
-                        if (value.toInt() >= months.length)
+                        if (value.toInt() >= months.length) {
                           return const SizedBox();
+                        }
                         return Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(

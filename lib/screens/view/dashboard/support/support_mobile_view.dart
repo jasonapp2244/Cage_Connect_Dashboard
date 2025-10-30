@@ -123,8 +123,7 @@ class _SupportMobileViewState extends State<SupportMobileView> {
                 ),
               ],
             ),
-        
-         
+
             const SizedBox(height: 16),
             // Table with Horizontal Scroll
             Expanded(
@@ -252,7 +251,7 @@ class _KPICard extends StatelessWidget {
     required this.title,
     required this.value,
     required this.subtitle,
-    this.isHighlighted = false,
+    required this.isHighlighted,
   });
 
   @override

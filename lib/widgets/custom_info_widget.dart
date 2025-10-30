@@ -19,15 +19,16 @@ class CustomInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final adaptive = Responsive.of(context);
     return Container(
-      height: adaptive.screenWidth > 1212
-          ? adaptive.height(17)
-          : adaptive.height(17), // instead of 160
+      // height: adaptive.screenWidth > 1212
+      //     ? adaptive.height(17)
+      //     : adaptive.height(17), // instead of 160
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

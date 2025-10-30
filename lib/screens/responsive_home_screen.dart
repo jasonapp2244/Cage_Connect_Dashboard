@@ -1,8 +1,8 @@
 import 'package:cageconnectdashboard/controller/dashboard_provider.dart';
 import 'package:cageconnectdashboard/screens/responsive_dashboard_screen.dart';
-import 'package:cageconnectdashboard/screens/responsive_subscriptions_screen.dart';
+import 'package:cageconnectdashboard/screens/view/subscriptionandpayment/responsive_subscriptions_screen.dart';
 import 'package:cageconnectdashboard/screens/responsive_users_screen.dart';
-import 'package:cageconnectdashboard/screens/view/dashboard/main/dashboard_screen.dart';
+import 'package:cageconnectdashboard/screens/view/dashboard/event_view.dart/responsive_event_view.dart';
 
 import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:cageconnectdashboard/widgets/custom_searchbar.dart';
@@ -21,6 +21,7 @@ class ResponsiveHomeScreen extends StatelessWidget {
     final List<Widget> pages = [
       DashboardResponsiveScreen(),
       ResponsiveUsersScreen(),
+      ResponsiveEventsScreen(),
       ResponsiveSubscriptionsScreen(),
       const Center(child: Text('Payments')),
       const Center(child: Text('Support Tickets')),
@@ -30,17 +31,18 @@ class ResponsiveHomeScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final bool isMobile = width <= mobile;
     final bool isTablet = width > mobile && width <= tablet;
+    final bool isDesktop = width > tablet;
 
     return Scaffold(
       backgroundColor: const Color(0xffF5F6FA),
 
       // ✅ Drawer for mobile
-      drawer: isMobile
+      drawer: (isMobile || isTablet)
           ? Drawer(child: _SideMenu(provider: provider, isMobile: true))
           : null,
 
       // ✅ AppBar (only for mobile)
-      appBar: isMobile
+      appBar: (isMobile || isTablet)
           ? AppBar(
               actionsPadding: EdgeInsets.only(right: 16),
               backgroundColor: Colors.white,
@@ -73,8 +75,8 @@ class ResponsiveHomeScreen extends StatelessWidget {
       // ✅ Layout for tablet & desktop
       body: Row(
         children: [
-          if (!isMobile)
-            Container(
+          if (isDesktop)
+            SizedBox(
               width: 251,
               height: double.infinity,
               child: _SideMenu(provider: provider, isMobile: false),

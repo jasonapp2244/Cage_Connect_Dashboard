@@ -1,3 +1,8 @@
+import 'package:cageconnectdashboard/models/event_view.dart';
+import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
+import 'package:cageconnectdashboard/widgets/custom_status.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_cell.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_header.dart';
 import 'package:flutter/material.dart';
 
 class EventTabletView extends StatefulWidget {
@@ -126,13 +131,13 @@ class _TableHeaderRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(width: 140, child: _TableHeader('Event Title')),
-          SizedBox(width: 90, child: _TableHeader('Organizer')),
-          SizedBox(width: 180, child: _TableHeader('Category')),
-          SizedBox(width: 100, child: _TableHeader('Date & Time')),
-          SizedBox(width: 120, child: _TableHeader('Status')),
+          CustomHeaderCell(text: 'Events Title', width: 140),
+          CustomHeaderCell(text: 'Organizer', width: 90),
+          CustomHeaderCell(text: 'Category', width: 180),
+          CustomHeaderCell(text: 'Date & Time', width: 100),
+          CustomHeaderCell(text: 'Status', width: 120),
 
-          SizedBox(width: 150, child: _TableHeader('Action')),
+          CustomHeaderCell(text: 'Action', width: 120),
         ],
       ),
     );
@@ -140,7 +145,7 @@ class _TableHeaderRow extends StatelessWidget {
 }
 
 class _TabletTableRow extends StatelessWidget {
-  final _UserData user;
+  final EventView user;
   final int index;
 
   const _TabletTableRow({required this.user, required this.index});
@@ -158,34 +163,33 @@ class _TabletTableRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 140,
-            child: _TableCell(
-              Text(user.name, style: const TextStyle(fontSize: 13)),
+            child: CustomTableCell(
+              Text(user.eventTitle, style: const TextStyle(fontSize: 13)),
             ),
           ),
           SizedBox(
             width: 90,
-            child: _TableCell(
-              Text(user.role, style: const TextStyle(fontSize: 13)),
+            child: CustomTableCell(
+              Text(user.organizer, style: const TextStyle(fontSize: 13)),
             ),
           ),
           SizedBox(
             width: 180,
-            child: _TableCell(
-              Text(user.email, style: const TextStyle(fontSize: 13)),
+            child: CustomTableCell(
+              Text(user.category, style: const TextStyle(fontSize: 13)),
             ),
           ),
-          SizedBox(width: 100, child: _TableCell(_StatusBadge(user.status))),
+          SizedBox(
+            width: 100,
+            child: CustomTableCell(
+              Text(user.dateAndTime, style: const TextStyle(fontSize: 13)),
+            ),
+          ),
           SizedBox(
             width: 120,
-            child: _TableCell(_SubscriptionBadge(user.subscription)),
+            child: CustomTableCell(CustomStatusBadge(user.status)),
           ),
-          SizedBox(
-            width: 130,
-            child: _TableCell(
-              Text(user.joinedDate, style: const TextStyle(fontSize: 13)),
-            ),
-          ),
-          SizedBox(width: 90, child: _TableCell(_ActionButtons())),
+          SizedBox(width: 120, child: CustomTableCell(CustomActionButtons())),
         ],
       ),
     );
@@ -221,176 +225,21 @@ class _FilterPill extends StatelessWidget {
   }
 }
 
-class _TableHeader extends StatelessWidget {
-  final String text;
-
-  const _TableHeader(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 14.0),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 13,
-          color: Color(0xff060606),
-        ),
-      ),
-    );
-  }
-}
-
-class _TableCell extends StatelessWidget {
-  final Widget child;
-
-  const _TableCell(this.child);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-      child: child,
-    );
-  }
-}
-
-class _StatusBadge extends StatelessWidget {
-  final String status;
-
-  const _StatusBadge(this.status);
-
-  @override
-  Widget build(BuildContext context) {
-    final isActive = status == 'Active';
-    return Text(
-      status,
-      style: TextStyle(
-        color: isActive ? Colors.green : Colors.red,
-        fontWeight: FontWeight.w500,
-        fontSize: 13,
-      ),
-    );
-  }
-}
-
-class _SubscriptionBadge extends StatelessWidget {
-  final String subscription;
-
-  const _SubscriptionBadge(this.subscription);
-
-  @override
-  Widget build(BuildContext context) {
-    final isPremium = subscription == 'Premium';
-    return Text(
-      subscription,
-      style: TextStyle(
-        color: isPremium ? Colors.orange : const Color(0xff060606),
-        fontWeight: FontWeight.w500,
-        fontSize: 13,
-      ),
-    );
-  }
-}
-
-class _ActionButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: Icon(
-            Icons.visibility_outlined,
-            color: Colors.grey.shade600,
-            size: 20,
-          ),
-          onPressed: () {},
-          padding: EdgeInsets.zero,
-          constraints: const BoxConstraints(),
-        ),
-        const SizedBox(width: 8),
-        IconButton(
-          icon: Icon(
-            Icons.delete_outline,
-            color: Colors.grey.shade600,
-            size: 20,
-          ),
-          onPressed: () {},
-          padding: EdgeInsets.zero,
-          constraints: const BoxConstraints(),
-        ),
-      ],
-    );
-  }
-}
-
 final _users = [
-  _UserData(
+  EventView(
+    'Blood Donation Camp',
     'Mike Johnson',
-    'Promoter',
     'mikej@gmail.com',
+    '12 Sep 2025, 10:00 AM',
     'Active',
-    'Free',
-    '05 Sep 2025',
+    '2-05-2025',
   ),
-  _UserData(
+  EventView(
+    'Eye Checkup Driv',
     'Sarah Lee',
-    'Fighter',
-    'sarahlee@yahoo.com',
-    'Active',
-    'Premium',
-    '28 Aug 2025',
-  ),
-  _UserData(
-    'Ahmed Khan',
-    'Promoter',
-    'ahmedkhan@gmail.com',
+    'mikej@gmail.com',
+    '15 Sep 2025, 2:00 PM',
     'In-active',
-    'Free',
-    '01 Sep 2025',
-  ),
-  _UserData(
-    'David Miller',
-    'Fighter',
-    'david.miller@gmail.com',
-    'Active',
-    'Premium',
-    '15 Aug 2025',
-  ),
-  _UserData(
-    'Emily Chen',
-    'Promoter',
-    'emily.chen@outlook.com',
-    'Active',
-    'Free',
-    '20 Aug 2025',
-  ),
-  _UserData(
-    'James Wilson',
-    'Fighter',
-    'jamesw@gmail.com',
-    'In-active',
-    'Premium',
-    '10 Aug 2025',
+    '2-05-2025',
   ),
 ];
-
-class _UserData {
-  final String name;
-  final String role;
-  final String email;
-  final String status;
-  final String subscription;
-  final String joinedDate;
-
-  _UserData(
-    this.name,
-    this.role,
-    this.email,
-    this.status,
-    this.subscription,
-    this.joinedDate,
-  );
-}

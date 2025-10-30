@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomStatusBadge extends StatelessWidget {
   final String status;
 
-  const CustomStatusBadge(this.status);
+  const CustomStatusBadge(this.status, {super.key});
 
   @override
   Widget build(BuildContext context) {

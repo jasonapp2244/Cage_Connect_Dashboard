@@ -1,6 +1,5 @@
 import 'package:cageconnectdashboard/controller/dashboard_provider.dart';
 import 'package:cageconnectdashboard/screens/dashboard/dashoard_web/dashboard_main.dart';
-import 'package:cageconnectdashboard/screens/dashboard/dashoard_web/dashboard_screen.dart';
 import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +37,7 @@ class DashboardMainScreen extends StatelessWidget {
         children: [
           // Side menu only for tablet/desktop
           if (!isMobile)
-            Container(
+            SizedBox(
               width: 251,
               height: double.infinity,
               child: _SideMenu(provider: provider, isMobile: false),

@@ -1,6 +1,5 @@
 import 'package:cageconnectdashboard/models/user_data.dart';
 import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
-import 'package:cageconnectdashboard/screens/view/dashboard/user_management/users_mobile_view.dart';
 import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
 import 'package:cageconnectdashboard/widgets/custom_filter_pill.dart';
@@ -12,7 +11,6 @@ import 'package:cageconnectdashboard/widgets/custom_table_cell.dart';
 import 'package:cageconnectdashboard/widgets/custom_table_header.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 
 class UsersTabletView extends StatefulWidget {
   const UsersTabletView({super.key});

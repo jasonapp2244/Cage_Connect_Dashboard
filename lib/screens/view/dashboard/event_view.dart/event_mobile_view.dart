@@ -1,3 +1,4 @@
+import 'package:cageconnectdashboard/models/event_view.dart';
 import 'package:flutter/material.dart';
 
 class EventMobileView extends StatefulWidget {
@@ -142,7 +143,7 @@ class _TableHeaderRow extends StatelessWidget {
 }
 
 class _MobileTableRow extends StatelessWidget {
-  final _UserData user;
+  final EventView user;
   final int index;
 
   const _MobileTableRow({required this.user, required this.index});
@@ -315,62 +316,20 @@ class _ActionButtons extends StatelessWidget {
 }
 
 final _users = [
-  _UserData(
-    'Blood Donation Camp',
-    'Mike Johnson',
-    'mikej@gmail.com',
-    '12 Sep 2025, 10:00 AM',
-    'Active',
+  EventView(
+    'Blood Donation Camp', // eventTitle
+    'Mike Johnson', // organizer
+    'Health', // category
+    '12 Sep 2025, 10:00 AM', // dateAndTime
+    'Active', // status
+    '05 Sep 2025', // date
   ),
-  _UserData(
-    'Eye Checkup Driv',
+  EventView(
+    'Eye Checkup Drive',
     'Sarah Lee',
-    'mikej@gmail.com',
+    'Health',
     '15 Sep 2025, 2:00 PM',
     'In-active',
-  ),
-  _UserData(
-    'Blood Donation Camp',
-    'Mike Johnson',
-    'mikej@gmail.com',
-    '12 Sep 2025, 10:00 AM',
-    'Active',
-  ),
-  _UserData(
-    'Eye Checkup Driv',
-    'Sarah Lee',
-    'mikej@gmail.com',
-    '15 Sep 2025, 2:00 PM',
-    'In-active',
-  ),
-  _UserData(
-    'Blood Donation Camp',
-    'Mike Johnson',
-    'mikej@gmail.com',
-    '12 Sep 2025, 10:00 AM',
-    'Active',
-  ),
-  _UserData(
-    'Eye Checkup Driv',
-    'Sarah Lee',
-    'mikej@gmail.com',
-    '15 Sep 2025, 2:00 PM',
-    'In-active',
+    '08 Sep 2025',
   ),
 ];
-
-class _UserData {
-  final String eventTitle;
-  final String organizer;
-  final String category;
-  final String dateAndTime;
-  final String status;
-
-  _UserData(
-    this.eventTitle,
-    this.organizer,
-    this.category,
-    this.dateAndTime,
-    this.status,
-  );
-}
