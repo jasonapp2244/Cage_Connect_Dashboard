@@ -1,6 +1,6 @@
-import 'package:cageconnectdashboard/screens/view/dashboard/subscriptions_mobile_view.dart';
-import 'package:cageconnectdashboard/screens/view/dashboard/subscriptions_tablet_view.dart';
-import 'package:cageconnectdashboard/screens/view/dashboard/subscriptions_web_view.dart';
+import 'package:cageconnectdashboard/screens/view/subscriptionandpayment/subscriptions_mobile_view.dart';
+import 'package:cageconnectdashboard/screens/view/subscriptionandpayment/subscriptions_tablet_view.dart';
+import 'package:cageconnectdashboard/screens/view/subscriptionandpayment/subscriptions_web_view.dart';
 import 'package:cageconnectdashboard/utils/dimension.dart';
 import 'package:flutter/material.dart';
 
@@ -27,4 +27,3 @@ class ResponsiveSubscriptionsScreen extends StatelessWidget {
     );
   }
 }
-

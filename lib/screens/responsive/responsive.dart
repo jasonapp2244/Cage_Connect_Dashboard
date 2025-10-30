@@ -25,11 +25,11 @@ class ScreenSize {
     textScaleFactor = _mediaQueryData.textScaleFactor;
     padding = _mediaQueryData.padding;
     platformBrightness = _mediaQueryData.platformBrightness;
-    
+
     // Divide screen into 100 blocks horizontally and vertically
     blockSizeHorizontal = screenWidth / 100;
     blockSizeVertical = screenHeight / 100;
-    
+
     // Calculate safe area blocks (considering notches, status bars, etc.)
     _safeAreaHorizontal = padding.left + padding.right;
     _safeAreaVertical = padding.top + padding.bottom;
@@ -78,23 +78,27 @@ class Adaptive {
   double safeWidth(double percent) => ScreenSize.safeBlockHorizontal * percent;
   double safeHeight(double percent) => ScreenSize.safeBlockVertical * percent;
 
-  // Font sizing with more sophisticated scaling
-  double fontSize(double size, {double min = 10, double max = double.infinity}) {
-    // Base scaling on width in portrait, height in landscape
-    final baseSize = isPortrait ? screenWidth : screenHeight;
-    final scaleFactor = isPortrait ? 0.0025 : 0.0015;
-    double scaledSize = baseSize * scaleFactor * size;
-    
-    // Apply text scale factor from system settings
-    scaledSize *= textScaleFactor;
-    
-    // Enforce min and max bounds
-    return scaledSize.clamp(min, max);
+  double fontSize(
+    double size, {
+    double min = 10,
+    double max = double.infinity,
+  }) {
+    final baseWidth =
+        1440.0; // a design reference width (e.g. desktop Figma width)
+    final scale = ScreenSize.screenWidth / baseWidth;
+
+    // Multiply the base size by scale, but never let it exceed the min/max limits
+    double scaled = size * scale;
+
+    // Adjust further for text scale factor (accessibility)
+    scaled *= ScreenSize.textScaleFactor;
+
+    return scaled.clamp(min, max);
   }
 
   // Spacing utilities
   EdgeInsets paddingAll(double percent) => EdgeInsets.all(width(percent));
-  EdgeInsets paddingSymmetric({double horizontal = 0, double vertical = 0}) => 
+  EdgeInsets paddingSymmetric({double horizontal = 0, double vertical = 0}) =>
       EdgeInsets.symmetric(
         horizontal: width(horizontal),
         vertical: height(vertical),
@@ -114,7 +118,8 @@ class Adaptive {
   // Spacer widgets
   SizedBox verticalSpace(double height) => SizedBox(height: (height));
   SizedBox horizontalSpace(double width) => SizedBox(width: (width));
-  SizedBox space(double width, double height) => SizedBox(width: (width), height: (height));
+  SizedBox space(double width, double height) =>
+      SizedBox(width: (width), height: (height));
 
   // Adaptive layout builder
   Widget builder({

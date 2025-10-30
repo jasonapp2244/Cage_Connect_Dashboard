@@ -1,6 +1,6 @@
-import 'package:cageconnectdashboard/screens/view/dashboard/users_mobile_view.dart';
-import 'package:cageconnectdashboard/screens/view/dashboard/users_tablet_view.dart';
-import 'package:cageconnectdashboard/screens/view/dashboard/users_web_view.dart';
+import 'package:cageconnectdashboard/screens/view/dashboard/user_management/users_mobile_view.dart';
+import 'package:cageconnectdashboard/screens/view/dashboard/user_management/users_tablet_view.dart';
+import 'package:cageconnectdashboard/screens/view/dashboard/user_management/users_web_view.dart';
 import 'package:cageconnectdashboard/utils/dimension.dart';
 import 'package:flutter/material.dart';
 
@@ -27,4 +27,3 @@ class ResponsiveUsersScreen extends StatelessWidget {
     );
   }
 }
-

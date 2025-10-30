@@ -1,3 +1,8 @@
+import 'package:cageconnectdashboard/models/subscription_model.dart';
+import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
+import 'package:cageconnectdashboard/widgets/custom_status.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_cell.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_header.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionsWebView extends StatelessWidget {
@@ -151,14 +156,14 @@ class SubscriptionsWebView extends StatelessWidget {
                         ),
                       ),
                       children: const [
-                        _TableHeader('Transaction ID'),
-                        _TableHeader('User'),
-                        _TableHeader('Subscription Plan'),
-                        _TableHeader('Payment Method'),
-                        _TableHeader('Status'),
-                        _TableHeader('Start Date'),
-                        _TableHeader('Expiry Date'),
-                        _TableHeader('Action'),
+                        CustomHeaderCell(text: 'Transaction ID'),
+                        CustomHeaderCell(text: 'User'),
+                        CustomHeaderCell(text: 'Subscription Plan'),
+                        CustomHeaderCell(text: 'Payment Method'),
+                        CustomHeaderCell(text: 'Status'),
+                        CustomHeaderCell(text: 'Start Date'),
+                        CustomHeaderCell(text: 'Expiry Date'),
+                        CustomHeaderCell(text: 'Action'),
                       ],
                     ),
                     // Table Rows
@@ -175,7 +180,7 @@ class SubscriptionsWebView extends StatelessWidget {
 
   List<TableRow> _buildTableRows() {
     final subscriptions = [
-      _SubscriptionData(
+      SubscriptionData(
         'TX-9001',
         'Mike Johnson',
         'Premium Monthly',
@@ -184,7 +189,7 @@ class SubscriptionsWebView extends StatelessWidget {
         '01 Sep 2025',
         '01 Oct 2025',
       ),
-      _SubscriptionData(
+      SubscriptionData(
         'TX-9002',
         'Sarah Lee',
         'Premium Yearly',
@@ -193,7 +198,7 @@ class SubscriptionsWebView extends StatelessWidget {
         '15 Aug 2025',
         '05 Sep 2025',
       ),
-      _SubscriptionData(
+      SubscriptionData(
         'TX-9003',
         'Ahmed Khan',
         'Free',
@@ -202,7 +207,7 @@ class SubscriptionsWebView extends StatelessWidget {
         '-',
         '-',
       ),
-      _SubscriptionData(
+      SubscriptionData(
         'TX-9004',
         'David Miller',
         'Premium Monthly',
@@ -211,7 +216,7 @@ class SubscriptionsWebView extends StatelessWidget {
         '10 Sep 2025',
         '10 Oct 2025',
       ),
-      _SubscriptionData(
+      SubscriptionData(
         'TX-9005',
         'Emily Chen',
         'Premium Yearly',
@@ -232,14 +237,15 @@ class SubscriptionsWebView extends StatelessWidget {
               border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
             ),
             children: [
-              _TableCell(Text(sub.transactionId)),
-              _TableCell(Text(sub.user)),
-              _TableCell(Text(sub.plan)),
-              _TableCell(Text(sub.paymentMethod)),
-              _TableCell(_StatusBadge(sub.status)),
-              _TableCell(Text(sub.startDate)),
-              _TableCell(Text(sub.expiryDate)),
-              _TableCell(_ActionButtons()),
+              CustomTableCell(Text(sub.transactionId)),
+              CustomTableCell(Text(sub.user)),
+              CustomTableCell(Text(sub.plan)),
+              CustomTableCell(Text(sub.paymentMethod)),
+              CustomTableCell(CustomStatusBadge(sub.status)),
+              CustomTableCell(Text(sub.startDate)),
+              CustomTableCell(Text(sub.expiryDate)),
+              CustomTableCell(CustomActionButtons()),
+              CustomTableCell(CustomActionButtons()),
             ],
           ),
         )
@@ -302,108 +308,9 @@ class _KPICard extends StatelessWidget {
   }
 }
 
-class _TableHeader extends StatelessWidget {
-  final String text;
 
-  const _TableHeader(this.text);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 14,
-          color: Color(0xff060606),
-        ),
-      ),
-    );
-  }
-}
 
-class _TableCell extends StatelessWidget {
-  final Widget child;
 
-  const _TableCell(this.child);
+//deactviate button
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(16.0), child: child);
-  }
-}
-
-class _StatusBadge extends StatelessWidget {
-  final String status;
-
-  const _StatusBadge(this.status);
-
-  @override
-  Widget build(BuildContext context) {
-    final isActive = status == 'Active';
-    return Text(
-      status,
-      style: TextStyle(
-        color: isActive ? Colors.green : Colors.red,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-  }
-}
-
-class _ActionButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: Icon(Icons.edit_outlined, color: Colors.grey.shade600),
-          onPressed: () {},
-          padding: EdgeInsets.zero,
-          constraints: const BoxConstraints(),
-          iconSize: 20,
-        ),
-        const SizedBox(width: 8),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xffED1C24),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            minimumSize: Size.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: const Text(
-            'Deactivate',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SubscriptionData {
-  final String transactionId;
-  final String user;
-  final String plan;
-  final String paymentMethod;
-  final String status;
-  final String startDate;
-  final String expiryDate;
-
-  _SubscriptionData(
-    this.transactionId,
-    this.user,
-    this.plan,
-    this.paymentMethod,
-    this.status,
-    this.startDate,
-    this.expiryDate,
-  );
-}

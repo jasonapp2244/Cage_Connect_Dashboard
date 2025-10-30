@@ -1,4 +1,11 @@
+import 'package:cageconnectdashboard/models/subscription_model.dart';
 import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
+import 'package:cageconnectdashboard/utils/colors.dart';
+import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
+import 'package:cageconnectdashboard/widgets/custom_status.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_cell.dart'
+    show CustomTableCell;
+import 'package:cageconnectdashboard/widgets/custom_table_header.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionsMobileView extends StatefulWidget {
@@ -21,7 +28,7 @@ class _SubscriptionsMobileViewState extends State<SubscriptionsMobileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.bgColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -49,16 +56,16 @@ class _SubscriptionsMobileViewState extends State<SubscriptionsMobileView> {
                             text: 'Sort by: ',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Color(
-                                0xff060606,
-                              ).withOpacity(0.7), // lighter
+                              color: AppColors.textColor.withOpacity(
+                                0.7,
+                              ), // lighter
                             ),
                           ),
                           TextSpan(
                             text: 'Latest',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Color(0xff060606), // darker
+                              color: AppColors.textColor, // darker
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -104,7 +111,7 @@ class _SubscriptionsMobileViewState extends State<SubscriptionsMobileView> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xffED1C24),
+                      backgroundColor: AppColors.primaryColor,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 12,
@@ -116,7 +123,7 @@ class _SubscriptionsMobileViewState extends State<SubscriptionsMobileView> {
                     child: const Text(
                       'Export CSV',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.bgColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -226,16 +233,16 @@ class _TableHeaderRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(width: 120, child: _TableHeader('Txn ID')),
-          SizedBox(width: 120, child: _TableHeader('User')),
-          SizedBox(width: 140, child: _TableHeader('Plan')),
-          SizedBox(width: 120, child: _TableHeader('Payment')),
-          SizedBox(width: 90, child: _TableHeader('Status')),
-          SizedBox(width: 110, child: _TableHeader('Start')),
-          SizedBox(width: 110, child: _TableHeader('Expiry')),
+          SizedBox(width: 120, child: CustomHeaderCell(text: 'Txn ID')),
+          SizedBox(width: 120, child: CustomHeaderCell(text: 'User')),
+          SizedBox(width: 140, child: CustomHeaderCell(text: 'Plan')),
+          SizedBox(width: 120, child: CustomHeaderCell(text: 'Payment')),
+          SizedBox(width: 90, child: CustomHeaderCell(text: 'Status')),
+          SizedBox(width: 110, child: CustomHeaderCell(text: 'Start')),
+          SizedBox(width: 110, child: CustomHeaderCell(text: 'Expiry')),
           SizedBox(
             width: 110,
-            child: _TableHeader('Action'),
+            child: CustomHeaderCell(text: 'Action'),
           ), // Match row width
         ],
       ),
@@ -244,7 +251,7 @@ class _TableHeaderRow extends StatelessWidget {
 }
 
 class _MobileTableRow extends StatelessWidget {
-  final _SubscriptionData subscription;
+  final SubscriptionData subscription;
   final int index;
 
   const _MobileTableRow({required this.subscription, required this.index});
@@ -262,24 +269,27 @@ class _MobileTableRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 120,
-            child: _TableCell(Text(subscription.transactionId)),
+            child: CustomTableCell(Text(subscription.transactionId)),
           ),
-          SizedBox(width: 120, child: _TableCell(Text(subscription.user))),
-          SizedBox(width: 140, child: _TableCell(Text(subscription.plan))),
+          SizedBox(width: 120, child: CustomTableCell(Text(subscription.user))),
+          SizedBox(width: 140, child: CustomTableCell(Text(subscription.plan))),
           SizedBox(
             width: 120,
-            child: _TableCell(Text(subscription.paymentMethod)),
+            child: CustomTableCell(Text(subscription.paymentMethod)),
           ),
           SizedBox(
             width: 90,
-            child: _TableCell(_StatusBadge(subscription.status)),
+            child: CustomTableCell(CustomStatusBadge(subscription.status)),
           ),
-          SizedBox(width: 110, child: _TableCell(Text(subscription.startDate))),
           SizedBox(
             width: 110,
-            child: _TableCell(Text(subscription.expiryDate)),
+            child: CustomTableCell(Text(subscription.startDate)),
           ),
-          SizedBox(width: 110, child: _TableCell(_ActionButtons())),
+          SizedBox(
+            width: 110,
+            child: CustomTableCell(Text(subscription.expiryDate)),
+          ),
+          SizedBox(width: 110, child: CustomTableCell(CustomActionButtons())),
         ],
       ),
     );
@@ -304,7 +314,7 @@ class _KPICard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isHighlighted ? const Color(0xffED1C24) : Colors.white,
+        color: isHighlighted ? AppColors.primaryColor : Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -341,104 +351,8 @@ class _KPICard extends StatelessWidget {
   }
 }
 
-class _TableHeader extends StatelessWidget {
-  final String text;
-
-  const _TableHeader(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 11,
-          color: Color(0xff060606),
-        ),
-      ),
-    );
-  }
-}
-
-class _TableCell extends StatelessWidget {
-  final Widget child;
-
-  const _TableCell(this.child);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-      child: child,
-    );
-  }
-}
-
-class _StatusBadge extends StatelessWidget {
-  final String status;
-
-  const _StatusBadge(this.status);
-
-  @override
-  Widget build(BuildContext context) {
-    final isActive = status == 'Active';
-    return Text(
-      status,
-      style: TextStyle(
-        color: isActive ? Colors.green : Colors.red,
-        fontWeight: FontWeight.w500,
-        fontSize: 11,
-      ),
-    );
-  }
-}
-
-class _ActionButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          icon: Icon(
-            Icons.edit_outlined,
-            color: Colors.grey.shade600,
-            size: 16,
-          ),
-          onPressed: () {},
-          padding: EdgeInsets.zero,
-          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-          visualDensity: VisualDensity.compact,
-        ),
-        const SizedBox(width: 4),
-        Flexible(
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xffED1C24),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            child: const Text(
-              'Deactivate',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 final _subscriptions = [
-  _SubscriptionData(
+  SubscriptionData(
     'TX-9001',
     'Mike Johnson',
     'Premium Monthly',
@@ -447,7 +361,7 @@ final _subscriptions = [
     '01 Sep 2025',
     '01 Oct 2025',
   ),
-  _SubscriptionData(
+  SubscriptionData(
     'TX-9002',
     'Sarah Lee',
     'Premium Yearly',
@@ -456,25 +370,5 @@ final _subscriptions = [
     '15 Aug 2025',
     '05 Sep 2025',
   ),
-  _SubscriptionData('TX-9003', 'Ahmed Khan', 'Free', '-', 'Active', '-', '-'),
+  SubscriptionData('TX-9003', 'Ahmed Khan', 'Free', '-', 'Active', '-', '-'),
 ];
-
-class _SubscriptionData {
-  final String transactionId;
-  final String user;
-  final String plan;
-  final String paymentMethod;
-  final String status;
-  final String startDate;
-  final String expiryDate;
-
-  _SubscriptionData(
-    this.transactionId,
-    this.user,
-    this.plan,
-    this.paymentMethod,
-    this.status,
-    this.startDate,
-    this.expiryDate,
-  );
-}

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/material.dart';
 
 class SupportTabletView extends StatefulWidget {
   const SupportTabletView({super.key});
@@ -262,7 +260,6 @@ class _SupportTabletViewState extends State<SupportTabletView> {
 
 Widget _buildStatusCellPriority(String status) {
   final isActive = status.toLowerCase() == 'Active';
-  final inActive = status.toLowerCase() == 'in-active';
   final isMedium = status.toLowerCase() == 'Medium';
 
   Color statusColor;

@@ -174,18 +174,14 @@ class _TabletTableRow extends StatelessWidget {
               Text(user.category, style: const TextStyle(fontSize: 13)),
             ),
           ),
-          SizedBox(width: 100, child: _TableCell(_StatusBadge(user.status))),
           SizedBox(
-            width: 120,
-            child: _TableCell(_SubscriptionBadge(user.dateAndTime)),
-          ),
-          SizedBox(
-            width: 130,
+            width: 100,
             child: _TableCell(
-              Text(user.status, style: const TextStyle(fontSize: 13)),
+              Text(user.dateAndTime, style: const TextStyle(fontSize: 13)),
             ),
           ),
-          SizedBox(width: 90, child: _TableCell(_ActionButtons())),
+          SizedBox(width: 120, child: _TableCell(_StatusBadge(user.status))),
+          SizedBox(width: 120, child: _TableCell(_ActionButtons())),
         ],
       ),
     );
@@ -275,24 +271,7 @@ class _StatusBadge extends StatelessWidget {
   }
 }
 
-class _SubscriptionBadge extends StatelessWidget {
-  final String subscription;
-
-  const _SubscriptionBadge(this.subscription);
-
-  @override
-  Widget build(BuildContext context) {
-    final isPremium = subscription == 'Premium';
-    return Text(
-      subscription,
-      style: TextStyle(
-        color: isPremium ? Colors.orange : const Color(0xff060606),
-        fontWeight: FontWeight.w500,
-        fontSize: 13,
-      ),
-    );
-  }
-}
+// Removed unused _SubscriptionBadge after aligning table columns
 
 class _ActionButtons extends StatelessWidget {
   @override
