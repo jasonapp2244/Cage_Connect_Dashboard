@@ -154,6 +154,7 @@ class _SettingsWebViewState extends State<SettingsWebView> {
               child: Column(
                 children: [
                   _buildLogoUpload(),
+                  const SizedBox(height: 16),
                   _buildDropdownField(
                     label: 'Color Theme',
                     value: _colorTheme,
@@ -272,29 +273,33 @@ class _SettingsWebViewState extends State<SettingsWebView> {
               color: Colors.black87,
             ),
           ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: value,
-                  isExpanded: false,
-                  icon: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.grey.shade600,
+
+          SizedBox(
+            height: 20,
+            child: Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: value,
+                    isExpanded: false,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.grey.shade600,
+                    ),
+                    style: const TextStyle(fontSize: 14, color: Colors.black87),
+                    items: options.map((String option) {
+                      return DropdownMenuItem<String>(
+                        value: option,
+                        child: Text(option),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        onChanged(newValue);
+                      }
+                    },
                   ),
-                  style: const TextStyle(fontSize: 14, color: Colors.black87),
-                  items: options.map((String option) {
-                    return DropdownMenuItem<String>(
-                      value: option,
-                      child: Text(option),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      onChanged(newValue);
-                    }
-                  },
                 ),
               ),
             ),
@@ -316,24 +321,24 @@ class _SettingsWebViewState extends State<SettingsWebView> {
               child: Column(
                 children: [
                   _buildProfilePictureUpload(),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16),
                   _buildTextField(
                     controller: _adminNameController,
                     label: 'Admin Name',
-                    hintText: 'Enter admin name',
+                    hintText: 'Admin name',
                   ),
                   const SizedBox(height: 16),
                   _buildTextField(
                     controller: _emailController,
                     label: 'Email Address',
-                    hintText: 'Enter email address',
+                    hintText: 'Email Address',
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 16),
                   _buildTextField(
                     controller: _phoneController,
                     label: 'Phone Number',
-                    hintText: 'Enter phone number',
+                    hintText: 'Phone Number',
                     keyboardType: TextInputType.phone,
                   ),
                 ],
@@ -409,17 +414,6 @@ class _SettingsWebViewState extends State<SettingsWebView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
-          ),
-        ),
         TextField(
           controller: controller,
           keyboardType: keyboardType,
@@ -567,24 +561,27 @@ class _SettingsWebViewState extends State<SettingsWebView> {
               color: Colors.black87,
             ),
           ),
-          DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: value,
-              isExpanded: false,
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: Colors.grey.shade600,
+          SizedBox(
+            height: 20,
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                value: value,
+                isExpanded: false,
+                icon: Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.grey.shade600,
+                ),
+                style: const TextStyle(fontSize: 14, color: Colors.black87),
+                items: const [
+                  DropdownMenuItem<String>(value: 'On', child: Text('On')),
+                  DropdownMenuItem<String>(value: 'Off', child: Text('Off')),
+                ],
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    onChanged(newValue);
+                  }
+                },
               ),
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
-              items: const [
-                DropdownMenuItem<String>(value: 'On', child: Text('On')),
-                DropdownMenuItem<String>(value: 'Off', child: Text('Off')),
-              ],
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  onChanged(newValue);
-                }
-              },
             ),
           ),
         ],
