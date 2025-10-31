@@ -7,6 +7,9 @@ class CustomTableCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(16.0), child: child);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
+      child: child,
+    );
   }
 }

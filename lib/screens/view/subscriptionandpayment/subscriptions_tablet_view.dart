@@ -1,8 +1,10 @@
 import 'package:cageconnectdashboard/models/subscription_model.dart';
 import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
+import 'package:cageconnectdashboard/widgets/custom_info_widget.dart';
 import 'package:cageconnectdashboard/widgets/custom_status.dart';
 import 'package:cageconnectdashboard/widgets/custom_table_cell.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_header.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionsTabletView extends StatefulWidget {
@@ -108,16 +110,15 @@ class _SubscriptionsTabletViewState extends State<SubscriptionsTabletView> {
             Row(
               children: [
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Total Revenue',
                     value: '250,000',
                     subtitle: '+12% this month',
-                    isHighlighted: true,
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Total Active',
                     value: '124',
                     subtitle: 'Premium User',
@@ -125,7 +126,7 @@ class _SubscriptionsTabletViewState extends State<SubscriptionsTabletView> {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Pending Payments',
                     value: '12',
                     subtitle: 'This month',
@@ -133,7 +134,7 @@ class _SubscriptionsTabletViewState extends State<SubscriptionsTabletView> {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Refunds Issued',
                     value: '\$12,540',
                     subtitle: 'This month',
@@ -197,14 +198,14 @@ class _TableHeaderRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(width: 130, child: _TableHeader('Txn ID')),
-          SizedBox(width: 140, child: _TableHeader('User')),
-          SizedBox(width: 150, child: _TableHeader('Plan')),
-          SizedBox(width: 130, child: _TableHeader('Payment')),
-          SizedBox(width: 100, child: _TableHeader('Status')),
-          SizedBox(width: 120, child: _TableHeader('Start Date')),
-          SizedBox(width: 120, child: _TableHeader('Expiry Date')),
-          SizedBox(width: 150, child: _TableHeader('Action')),
+          SizedBox(width: 130, child: CustomHeaderCell(text: 'Txn ID')),
+          SizedBox(width: 140, child: CustomHeaderCell(text: 'User')),
+          SizedBox(width: 150, child: CustomHeaderCell(text: 'Plan')),
+          SizedBox(width: 130, child: CustomHeaderCell(text: 'Payment')),
+          SizedBox(width: 100, child: CustomHeaderCell(text: 'Status')),
+          SizedBox(width: 120, child: CustomHeaderCell(text: 'Start Date')),
+          SizedBox(width: 120, child: CustomHeaderCell(text: 'Expiry Date')),
+          SizedBox(width: 150, child: CustomHeaderCell(text: 'Action')),
         ],
       ),
     );
@@ -282,82 +283,6 @@ class _TabletTableRow extends StatelessWidget {
           ),
           SizedBox(width: 150, child: CustomTableCell(CustomActionButtons())),
         ],
-      ),
-    );
-  }
-}
-
-class _KPICard extends StatelessWidget {
-  final String title;
-  final String value;
-  final String subtitle;
-  final bool isHighlighted;
-
-  const _KPICard({
-    required this.title,
-    required this.value,
-    required this.subtitle,
-    this.isHighlighted = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: isHighlighted ? AppColors.primaryColor : Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 13,
-              color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              color: isHighlighted ? Colors.white : const Color(0xff060606),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: 12,
-              color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TableHeader extends StatelessWidget {
-  final String text;
-
-  const _TableHeader(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 14.0),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 12,
-          color: Color(0xff060606),
-        ),
       ),
     );
   }

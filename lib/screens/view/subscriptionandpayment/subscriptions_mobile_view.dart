@@ -2,6 +2,7 @@ import 'package:cageconnectdashboard/models/subscription_model.dart';
 import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
 import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
+import 'package:cageconnectdashboard/widgets/custom_info_widget.dart';
 import 'package:cageconnectdashboard/widgets/custom_status.dart';
 import 'package:cageconnectdashboard/widgets/custom_table_cell.dart'
     show CustomTableCell;
@@ -139,17 +140,16 @@ class _SubscriptionsMobileViewState extends State<SubscriptionsMobileView> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 32,
-                    child: _KPICard(
+                    child: CustomInfoCard(
                       title: 'Total Revenue',
                       value: '250,000',
                       subtitle: '+12% this month',
-                      isHighlighted: true,
                     ),
                   ),
                   const SizedBox(width: 12),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 32,
-                    child: _KPICard(
+                    child: CustomInfoCard(
                       title: 'Total Active',
                       value: '124',
                       subtitle: 'Premium User',
@@ -158,7 +158,7 @@ class _SubscriptionsMobileViewState extends State<SubscriptionsMobileView> {
                   const SizedBox(width: 12),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 32,
-                    child: _KPICard(
+                    child: CustomInfoCard(
                       title: 'Pending Payments',
                       value: '12',
                       subtitle: 'This month',
@@ -167,7 +167,7 @@ class _SubscriptionsMobileViewState extends State<SubscriptionsMobileView> {
                   const SizedBox(width: 12),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 32,
-                    child: _KPICard(
+                    child: CustomInfoCard(
                       title: 'Refunds Issued',
                       value: '\$12,540',
                       subtitle: 'This month',
@@ -296,60 +296,60 @@ class _MobileTableRow extends StatelessWidget {
   }
 }
 
-class _KPICard extends StatelessWidget {
-  final String title;
-  final String value;
-  final String subtitle;
-  final bool isHighlighted;
+// class _KPICard extends StatelessWidget {
+//   final String title;
+//   final String value;
+//   final String subtitle;
+//   final bool isHighlighted;
 
-  const _KPICard({
-    required this.title,
-    required this.value,
-    required this.subtitle,
-    this.isHighlighted = false,
-  });
+//   const _KPICard({
+//     required this.title,
+//     required this.value,
+//     required this.subtitle,
+//     this.isHighlighted = false,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: isHighlighted ? AppColors.primaryColor : Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 12,
-              color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: isHighlighted ? Colors.white : const Color(0xff060606),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: 11,
-              color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.all(16),
+//       decoration: BoxDecoration(
+//         color: isHighlighted ? AppColors.primaryColor : Colors.white,
+//         borderRadius: BorderRadius.circular(12),
+//         border: Border.all(color: Colors.grey.shade200),
+//       ),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Text(
+//             title,
+//             style: TextStyle(
+//               fontSize: 12,
+//               color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
+//             ),
+//           ),
+//           const SizedBox(height: 8),
+//           Text(
+//             value,
+//             style: TextStyle(
+//               fontSize: 24,
+//               fontWeight: FontWeight.bold,
+//               color: isHighlighted ? Colors.white : const Color(0xff060606),
+//             ),
+//           ),
+//           const SizedBox(height: 4),
+//           Text(
+//             subtitle,
+//             style: TextStyle(
+//               fontSize: 11,
+//               color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 final _subscriptions = [
   SubscriptionData(

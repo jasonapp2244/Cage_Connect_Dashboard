@@ -417,22 +417,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // 1. Main Title
-                  const Text(
-                    'User Management',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                  const Spacer(), // Pushes content to the right
-                  // 2. Search Bar
-                  const _CustomSearchBar(),
-                  const SizedBox(width: 20),
-
-                  // 3. Notification and User Profile
-                  const _UserProfile(),
+              
                 ],
               ),
             ),

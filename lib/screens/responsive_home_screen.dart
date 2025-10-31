@@ -6,6 +6,7 @@ import 'package:cageconnectdashboard/screens/view/dashboard/event_view.dart/resp
 
 import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:cageconnectdashboard/widgets/custom_searchbar.dart';
+import 'package:cageconnectdashboard/widgets/custom_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,12 +19,20 @@ class ResponsiveHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<DashboardProvider>(context);
+    final List<String> pageTitles = [
+      'Dashboard',
+      'User Management',
+      'Events Monitoring',
+      'Subscriptions',
+      'Support Tickets',
+      'Settings',
+    ];
+
     final List<Widget> pages = [
       DashboardResponsiveScreen(),
       ResponsiveUsersScreen(),
       ResponsiveEventsScreen(),
       ResponsiveSubscriptionsScreen(),
-      const Center(child: Text('Payments')),
       const Center(child: Text('Support Tickets')),
       const Center(child: Text('Settings')),
     ];
@@ -45,21 +54,22 @@ class ResponsiveHomeScreen extends StatelessWidget {
       appBar: (isMobile || isTablet)
           ? AppBar(
               actionsPadding: EdgeInsets.only(right: 16),
-              backgroundColor: Colors.white,
-              elevation: 1,
+              backgroundColor: AppColors.cardColor,
+              elevation: 0,
               leading: Builder(
                 builder: (context) => IconButton(
                   icon: const Icon(Icons.menu, color: Colors.red),
                   onPressed: () {
-                    Scaffold.of(context).openDrawer(); // open drawer correctly
+                    Scaffold.of(context).openDrawer();
                   },
                 ),
               ),
-              title: const Text(
-                "",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+              title: Text(
+                pageTitles[provider.selectedIndex],
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w900,
+                  color: AppColors.textColor,
                 ),
               ),
               centerTitle: true,
@@ -67,6 +77,12 @@ class ResponsiveHomeScreen extends StatelessWidget {
                 CustomSearchBar(
                   hintText: 'Search by name, email, or role…',
                   width: 300,
+                ),
+                const SizedBox(width: 20),
+                const CustomProfileWidget(
+                  userName: 'Jamiee Dunn',
+                  userEmail: 'Jamie Dun',
+                  avatarImagePath: 'assets/images/jamie.png',
                 ),
               ],
             )
@@ -83,10 +99,54 @@ class ResponsiveHomeScreen extends StatelessWidget {
             ),
 
           Expanded(
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              child: pages[provider.selectedIndex],
+            child: Column(
+              children: [
+                // ✅ Header for tablet & desktop
+                if (isDesktop || isTablet)
+                  _buildHeaderForTabletDesktop(
+                    pageTitles[provider.selectedIndex],
+                  ),
+
+                // Content pages
+                Expanded(
+                  child: AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: pages[provider.selectedIndex],
+                  ),
+                ),
+              ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ✅ Header for tablet & desktop
+  Widget _buildHeaderForTabletDesktop(String title) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.cardColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      margin: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomSearchBar(hintText: 'Search by name, email, or role…'),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w900,
+              color: AppColors.textColor,
+            ),
+          ),
+          const CustomProfileWidget(
+            userName: 'Jamiee Dunn',
+            userEmail: 'Jamie Dun',
+            avatarImagePath: 'assets/images/jamie.png',
           ),
         ],
       ),
@@ -142,7 +202,7 @@ class _SideMenu extends StatelessWidget {
               _menuItem(context, Icons.dashboard, "Dashboard", 0),
               _menuItem(context, Icons.people, "User Management", 1),
               _menuItem(context, Icons.event, "Events Monitoring", 2),
-              _menuItem(context, Icons.payment, "Payments", 3),
+              _menuItem(context, Icons.payment, "Subscriptions", 3),
               _menuItem(context, Icons.support_agent, "Support Tickets", 4),
 
               const SizedBox(height: 60),
@@ -157,7 +217,7 @@ class _SideMenu extends StatelessWidget {
               const SizedBox(height: 16),
 
               _menuItem(context, Icons.settings, "Settings", 5),
-              _menuItem(context, Icons.logout, "Logout", 6),
+              _menuItem(context, Icons.logout, "Logout", -1),
             ],
           ),
         ),
@@ -174,7 +234,14 @@ class _SideMenu extends StatelessWidget {
     bool active = provider.selectedIndex == index;
 
     return InkWell(
-      onTap: () => provider.setPage(index),
+      onTap: () {
+        if (index >= 0) {
+          provider.setPage(index);
+        } else {
+          // Handle logout
+          // You can add logout logic here
+        }
+      },
       borderRadius: BorderRadius.circular(8),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),

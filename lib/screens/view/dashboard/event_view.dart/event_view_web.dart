@@ -28,7 +28,7 @@ class _EventWebViewState extends State<EventWebView> {
 
   @override
   Widget build(BuildContext context) {
-    var adaptive=Adaptive(context);
+    var adaptive = Adaptive(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -36,8 +36,8 @@ class _EventWebViewState extends State<EventWebView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-               _buildHeaderSection(adaptive),
-              const SizedBox(height: 20),
+            _buildHeaderSection(adaptive),
+            const SizedBox(height: 20),
             // Filter and Sort Section
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +98,8 @@ class _EventWebViewState extends State<EventWebView> {
                         scrollDirection: Axis.horizontal,
                         physics: const AlwaysScrollableScrollPhysics(),
                         child: SizedBox(
-                          width: 900, // Tablet table width
+                          width:
+                              750, // Adjusted table width to match column widths
                           child: Column(
                             children: [
                               // Header Row
@@ -126,38 +127,37 @@ class _EventWebViewState extends State<EventWebView> {
     );
   }
 }
- // 🧩 HEADER SECTION
-  // -----------------------
-  Widget _buildHeaderSection(Adaptive adaptive) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.cardColor,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomSearchBar(hintText: 'Search by name, email, or role…'),
-          Text(
-            'Dashboard',
-            style: TextStyle(
-              fontSize: adaptive.fontSize(32),
-              fontWeight: FontWeight.w900,
-              color: AppColors.textColor,
-            ),
-          ),
-          CustomProfileWidget(
-            userName: 'Jamiee Dunn',
-            userEmail: 'Jamie Dun',
-            avatarImagePath: 'assets/images/jamie.png',
-          ),
-        ],
-      ),
-    );
-  }
 
-  
+// 🧩 HEADER SECTION
+// -----------------------
+Widget _buildHeaderSection(Adaptive adaptive) {
+  return Container(
+    decoration: BoxDecoration(
+      color: AppColors.cardColor,
+      borderRadius: BorderRadius.circular(30),
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomSearchBar(hintText: 'Search by name, email, or role…'),
+        Text(
+          'Dashboard',
+          style: TextStyle(
+            fontSize: adaptive.fontSize(32),
+            fontWeight: FontWeight.w900,
+            color: AppColors.textColor,
+          ),
+        ),
+        CustomProfileWidget(
+          userName: 'Jamiee Dunn',
+          userEmail: 'Jamie Dun',
+          avatarImagePath: 'assets/images/jamie.png',
+        ),
+      ],
+    ),
+  );
+}
 
 class _TableHeaderRow extends StatelessWidget {
   const _TableHeaderRow();
@@ -171,10 +171,10 @@ class _TableHeaderRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CustomHeaderCell(text: 'Events Title', width: 120),
-          CustomHeaderCell(text: 'Organizer', width: 120),
-          CustomHeaderCell(text: 'Category', width: 120),
-          CustomHeaderCell(text: 'Date & Time', width: 120),
+          CustomHeaderCell(text: 'Events Title', width: 140),
+          CustomHeaderCell(text: 'Organizer', width: 90),
+          CustomHeaderCell(text: 'Category', width: 180),
+          CustomHeaderCell(text: 'Date & Time', width: 100),
           CustomHeaderCell(text: 'Status', width: 120),
           CustomHeaderCell(text: 'Action', width: 120),
         ],

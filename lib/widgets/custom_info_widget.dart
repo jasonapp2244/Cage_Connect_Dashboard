@@ -1,4 +1,5 @@
 import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
+import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomInfoCard extends StatelessWidget {
@@ -12,7 +13,7 @@ class CustomInfoCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.value,
-    this.color = Colors.white,
+    this.color = AppColors.cardColor,
   });
 
   @override

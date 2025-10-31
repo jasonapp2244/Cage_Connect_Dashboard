@@ -1,4 +1,5 @@
 import 'package:cageconnectdashboard/models/event_view.dart';
+import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class EventMobileView extends StatefulWidget {
@@ -189,10 +190,10 @@ class _FilterPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: isSelected ? const Color(0xffED1C24) : Colors.transparent,
+        color: isSelected ? AppColors.primaryColor : Colors.transparent,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isSelected ? const Color(0xffED1C24) : Colors.grey.shade300,
+          color: isSelected ? AppColors.primaryColor : Colors.grey.shade300,
         ),
       ),
       child: Text(

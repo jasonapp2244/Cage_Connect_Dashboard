@@ -1,5 +1,6 @@
 import 'package:cageconnectdashboard/models/subscription_model.dart';
 import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
+import 'package:cageconnectdashboard/widgets/custom_info_widget.dart';
 import 'package:cageconnectdashboard/widgets/custom_status.dart';
 import 'package:cageconnectdashboard/widgets/custom_table_cell.dart';
 import 'package:cageconnectdashboard/widgets/custom_table_header.dart';
@@ -98,16 +99,15 @@ class SubscriptionsWebView extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Total Revenue',
                     value: '250,000',
                     subtitle: '+12% this month',
-                    isHighlighted: true,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Total Active',
                     value: '124',
                     subtitle: 'Premium User',
@@ -115,7 +115,7 @@ class SubscriptionsWebView extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Pending Payments',
                     value: '12',
                     subtitle: 'This month',
@@ -123,7 +123,7 @@ class SubscriptionsWebView extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: _KPICard(
+                  child: CustomInfoCard(
                     title: 'Refunds Issued',
                     value: '\$12,540',
                     subtitle: 'This month',
