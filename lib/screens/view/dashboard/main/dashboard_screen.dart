@@ -44,8 +44,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           padding: EdgeInsetsGeometry.symmetric(horizontal: 12, vertical: 16),
           child: Column(
             children: [
-              _buildHeaderSection(adaptive),
-              const SizedBox(height: 20),
+              //       _buildHeaderSection(adaptive),
+              //      const SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
                   color: AppColors.cardColor,

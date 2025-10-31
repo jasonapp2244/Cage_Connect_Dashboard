@@ -1,5 +1,7 @@
 import 'package:cageconnectdashboard/controller/dashboard_provider.dart';
 import 'package:cageconnectdashboard/screens/responsive_dashboard_screen.dart';
+import 'package:cageconnectdashboard/screens/responsive_settings_screen.dart';
+import 'package:cageconnectdashboard/screens/view/dashboard/support/support_web_view.dart';
 import 'package:cageconnectdashboard/screens/view/subscriptionandpayment/responsive_subscriptions_screen.dart';
 import 'package:cageconnectdashboard/screens/responsive_users_screen.dart';
 import 'package:cageconnectdashboard/screens/view/dashboard/event_view.dart/responsive_event_view.dart';
@@ -33,8 +35,8 @@ class ResponsiveHomeScreen extends StatelessWidget {
       ResponsiveUsersScreen(),
       ResponsiveEventsScreen(),
       ResponsiveSubscriptionsScreen(),
-      const Center(child: Text('Support Tickets')),
-      const Center(child: Text('Settings')),
+      SupportWebView(),
+      ResponsiveSettingsScreen(),
     ];
 
     final width = MediaQuery.of(context).size.width;

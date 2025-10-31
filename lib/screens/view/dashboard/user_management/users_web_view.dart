@@ -24,8 +24,8 @@ class UsersWebView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeaderSection(adaptive),
-            const SizedBox(height: 20),
+            //   _buildHeaderSection(adaptive),
+            //   const SizedBox(height: 20),
             _buildFilterAndSortSection(),
             const SizedBox(height: 24),
             _buildUsersTable(),

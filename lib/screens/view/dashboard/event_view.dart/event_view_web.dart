@@ -36,8 +36,8 @@ class _EventWebViewState extends State<EventWebView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeaderSection(adaptive),
-            const SizedBox(height: 20),
+            //  _buildHeaderSection(adaptive),
+            //  const SizedBox(height: 20),
             // Filter and Sort Section
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,9 +98,9 @@ class _EventWebViewState extends State<EventWebView> {
                         scrollDirection: Axis.horizontal,
                         physics: const AlwaysScrollableScrollPhysics(),
                         child: SizedBox(
-                          width:
-                              750, // Adjusted table width to match column widths
+                          width: MediaQuery.of(context).size.width - 40,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Header Row
                               _TableHeaderRow(),
@@ -171,12 +171,12 @@ class _TableHeaderRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CustomHeaderCell(text: 'Events Title', width: 140),
-          CustomHeaderCell(text: 'Organizer', width: 90),
-          CustomHeaderCell(text: 'Category', width: 180),
-          CustomHeaderCell(text: 'Date & Time', width: 100),
-          CustomHeaderCell(text: 'Status', width: 120),
-          CustomHeaderCell(text: 'Action', width: 120),
+          Expanded(flex: 3, child: CustomHeaderCell(text: 'Events Title')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Organizer')),
+          Expanded(flex: 3, child: CustomHeaderCell(text: 'Category')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Date & Time')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Status')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Action')),
         ],
       ),
     );
@@ -200,35 +200,35 @@ class _TabletTableRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
-            width: 140,
+          Expanded(
+            flex: 3,
             child: CustomTableCell(
               Text(user.eventTitle, style: const TextStyle(fontSize: 13)),
             ),
           ),
-          SizedBox(
-            width: 90,
+          Expanded(
+            flex: 2,
             child: CustomTableCell(
               Text(user.organizer, style: const TextStyle(fontSize: 13)),
             ),
           ),
-          SizedBox(
-            width: 180,
+          Expanded(
+            flex: 3,
             child: CustomTableCell(
               Text(user.category, style: const TextStyle(fontSize: 13)),
             ),
           ),
-          SizedBox(
-            width: 100,
+          Expanded(
+            flex: 2,
             child: CustomTableCell(
               Text(user.dateAndTime, style: const TextStyle(fontSize: 13)),
             ),
           ),
-          SizedBox(
-            width: 120,
+          Expanded(
+            flex: 2,
             child: CustomTableCell(CustomStatusBadge(user.status)),
           ),
-          SizedBox(width: 120, child: CustomTableCell(CustomActionButtons())),
+          Expanded(flex: 2, child: CustomTableCell(CustomActionButtons())),
         ],
       ),
     );

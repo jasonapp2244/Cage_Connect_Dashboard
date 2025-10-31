@@ -1,372 +1,225 @@
-// import 'package:flutter/material.dart';
+import 'package:cageconnectdashboard/models/support_ticket_model.dart';
+import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
+import 'package:cageconnectdashboard/screens/view/dashboard/support/support_tablet_view.dart';
+import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
+import 'package:cageconnectdashboard/widgets/custom_filter_pill.dart';
+import 'package:cageconnectdashboard/widgets/custom_status.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_cell.dart';
+import 'package:cageconnectdashboard/widgets/custom_table_header.dart';
+import 'package:flutter/material.dart';
 
-// class SupportWebView extends StatelessWidget {
-//   SupportWebView({super.key});
+class SupportWebView extends StatefulWidget {
+  const SupportWebView({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: Padding(
-//         padding: const EdgeInsets.all(24.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             // Header Section
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 // Export CSV Button
-//                 ElevatedButton(
-//                   onPressed: () {},
-//                   style: ElevatedButton.styleFrom(
-//                     backgroundColor: const Color(0xffED1C24),
-//                     padding: const EdgeInsets.symmetric(
-//                       horizontal: 24,
-//                       vertical: 12,
-//                     ),
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(8),
-//                     ),
-//                   ),
-//                   child: const Text(
-//                     'Export CSV',
-//                     style: TextStyle(
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.w600,
-//                     ),
-//                   ),
-//                 ),
-//                 // Search and Sort
-//                 Row(
-//                   children: [
-//                     // Search Bar
-//                     Container(
-//                       width: 300,
-//                       padding: const EdgeInsets.symmetric(horizontal: 16),
-//                       decoration: BoxDecoration(
-//                         border: Border.all(color: Colors.grey.shade300),
-//                         borderRadius: BorderRadius.circular(8),
-//                       ),
-//                       child: TextField(
-//                         decoration: InputDecoration(
-//                           hintText: 'Search by Event Name / ID',
-//                           border: InputBorder.none,
-//                           icon: Icon(Icons.search, color: Colors.grey.shade600),
-//                         ),
-//                       ),
-//                     ),
-//                     const SizedBox(width: 16),
-//                     // Sort Dropdown
-//                     Container(
-//                       padding: const EdgeInsets.symmetric(
-//                         horizontal: 16,
-//                         vertical: 12,
-//                       ),
-//                       decoration: BoxDecoration(
-//                         border: Border.all(color: Colors.grey.shade300),
-//                         borderRadius: BorderRadius.circular(8),
-//                       ),
-//                       child: Row(
-//                         children: [
-//                           const Text(
-//                             'Sort by: Latest',
-//                             style: TextStyle(
-//                               fontSize: 14,
-//                               color: Color(0xff060606),
-//                             ),
-//                           ),
-//                           const SizedBox(width: 8),
-//                           Icon(
-//                             Icons.keyboard_arrow_down,
-//                             color: Colors.grey.shade600,
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(height: 24),
-//             // KPI Cards
+  @override
+  State<SupportWebView> createState() => _SupportWebViewState();
+}
 
-//             // Table
-//             Expanded(
-//               child: SingleChildScrollView(
-//                 child: Table(
-//                   columnWidths: const {
-//                     0: FlexColumnWidth(1.5),
-//                     1: FlexColumnWidth(2),
-//                     2: FlexColumnWidth(2),
-//                     3: FlexColumnWidth(1.5),
-//                     4: FlexColumnWidth(1.5),
-//                     5: FlexColumnWidth(1.5),
-//                     6: FlexColumnWidth(1.5),
-//                     7: FlexColumnWidth(1.5),
-//                   },
-//                   children: [
-//                     // Table Header
-//                     TableRow(
-//                       decoration: BoxDecoration(
-//                         color: Colors.grey.shade50,
-//                         border: Border(
-//                           bottom: BorderSide(color: Colors.grey.shade200),
-//                         ),
-//                       ),
-//                       children: const [
-//                         _TableHeader('Ticket ID'),
-//                         _TableHeader('User'),
-//                         _TableHeader('Subject'),
-//                         _TableHeader('Category'),
-//                         _TableHeader('Priority'),
-//                         _TableHeader('Status'),
-//                         _TableHeader('Created On'),
-//                         _TableHeader('Action'),
-//                       ],
-//                     ),
-//                     // Table Rows
-//                     ..._buildTableRows(),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
+class _SupportWebViewState extends State<SupportWebView> {
+  final ScrollController _horizontalScrollController = ScrollController();
 
-//   List<TableRow> _buildTableRows() {
-//     final subscriptions = [
-//       _SubscriptionData(
-//         'TK-1001',
-//         'Mike Johnson',
-//         'Payment not reflecting in account',
-//         'Payment Issue',
-//         'Active',
-//         ' Open',
-//         '01 Oct 2025',
-//       ),
-//       _SubscriptionData(
-//         'TK-1001',
-//         'Mike Johnson',
-//         'Payment not reflecting in account',
-//         'Payment Issue',
-//         'In-active',
-//         'Resolved',
-//         '01 Oct 2025',
-//       ),
-//       _SubscriptionData(
-//         'TK-1001',
-//         'Mike Johnson',
-//         'Payment not reflecting in account',
-//         'Payment Issue',
-//         'Medium',
-//         ' Open',
-//         '01 Oct 2025',
-//       ),
-//       _SubscriptionData(
-//         'TK-1001',
-//         'Mike Johnson',
-//         'Payment not reflecting in account',
-//         'Payment Issue',
-//         'Active',
-//         ' Open',
-//         '01 Oct 2025',
-//       ),
-//       _SubscriptionData(
-//         'TK-1001',
-//         'Mike Johnson',
-//         'Payment not reflecting in account',
-//         'Payment Issue',
-//         'Active',
-//         ' Open',
-//         '01 Oct 2025',
-//       ),
-//     ];
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
 
-//     return subscriptions
-//         .map(
-//           (sub) => TableRow(
-//             decoration: BoxDecoration(
-//               color: subscriptions.indexOf(sub) % 2 == 0
-//                   ? Colors.white
-//                   : Colors.grey.shade50,
-//               border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
-//             ),
-//             children: [
-//               _TableCell(Text(sub.transactionId)),
-//               _TableCell(Text(sub.user)),
-//               _TableCell(Text(sub.plan)),
-//               _TableCell(Text(sub.paymentMethod)),
-//               _TableCell(_StatusBadge(sub.status)),
-//               _TableCell(Text(sub.startDate)),
-//               _TableCell(Text(sub.expiryDate)),
-//               _TableCell(_ActionButtons()),
-//             ],
-//           ),
-//         )
-//         .toList();
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    var adaptive = Adaptive(context);
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //  _buildHeaderSection(adaptive),
+            //  const SizedBox(height: 20),
+            // Filter and Sort Section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Filter Pills
+                Row(
+                  children: [
+                    CustomFilterPill(text: 'All', isSelected: true),
+                    const SizedBox(width: 12),
+                    CustomFilterPill(text: 'Mobile', isSelected: false),
+                    const SizedBox(width: 12),
+                    CustomFilterPill(text: 'Desktop', isSelected: false),
+                  ],
+                ),
+                // Sort Dropdown
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Sort by: Latest',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xff060606),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.grey.shade600,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            // Compact Table with Horizontal Scroll
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Scrollbar(
+                      controller: _horizontalScrollController,
+                      thumbVisibility: true,
+                      thickness: 10,
+                      radius: const Radius.circular(5),
+                      scrollbarOrientation: ScrollbarOrientation.bottom,
+                      child: SingleChildScrollView(
+                        controller: _horizontalScrollController,
+                        scrollDirection: Axis.horizontal,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width - 40,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Header Row
+                              _TableHeaderRow(),
+                              // Table Rows
+                              ...List.generate(
+                                _users.length,
+                                (index) => _TabletTableRow(
+                                  user: _users[index],
+                                  index: index,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-// class _KPICard extends StatelessWidget {
-//   final String title;
-//   final String value;
-//   final String subtitle;
-//   final bool isHighlighted;
+class _TableHeaderRow extends StatelessWidget {
+  const _TableHeaderRow();
 
-//   _KPICard({
-//     required this.title,
-//     required this.value,
-//     required this.subtitle,
-//   });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+      ),
+      child: Row(
+        children: [
+          Expanded(flex: 3, child: CustomHeaderCell(text: 'Ticket ID')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'User')),
+          Expanded(flex: 3, child: CustomHeaderCell(text: 'Subject')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Category')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Priority')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Status')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Created On')),
+          Expanded(flex: 2, child: CustomHeaderCell(text: 'Action')),
+        ],
+      ),
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.all(20),
-//       decoration: BoxDecoration(
-//         color: isHighlighted ? const Color(0xffED1C24) : Colors.white,
-//         borderRadius: BorderRadius.circular(12),
-//         border: Border.all(color: Colors.grey.shade200),
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             title,
-//             style: TextStyle(
-//               fontSize: 14,
-//               color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
-//             ),
-//           ),
-//           const SizedBox(height: 8),
-//           Text(
-//             value,
-//             style: TextStyle(
-//               fontSize: 28,
-//               fontWeight: FontWeight.bold,
-//               color: isHighlighted ? Colors.white : const Color(0xff060606),
-//             ),
-//           ),
-//           const SizedBox(height: 4),
-//           Text(
-//             subtitle,
-//             style: TextStyle(
-//               fontSize: 12,
-//               color: isHighlighted ? Colors.white70 : Colors.grey.shade600,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+class _TabletTableRow extends StatelessWidget {
+  final SupportTicketModel user;
+  final int index;
 
-// class _TableHeader extends StatelessWidget {
-//   final String text;
+  const _TabletTableRow({required this.user, required this.index});
 
-//   const _TableHeader(this.text);
+  @override
+  Widget build(BuildContext context) {
+    final isEven = index % 2 == 0;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(16.0),
-//       child: Text(
-//         text,
-//         style: const TextStyle(
-//           fontWeight: FontWeight.w600,
-//           fontSize: 14,
-//           color: Color(0xff060606),
-//         ),
-//       ),
-//     );
-//   }
-// }
+    return Container(
+      decoration: BoxDecoration(
+        color: isEven ? Colors.white : Colors.grey.shade50,
+        border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: CustomTableCell(
+              Text(user.ticketId, style: const TextStyle(fontSize: 13)),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: CustomTableCell(
+              Text(user.user, style: const TextStyle(fontSize: 13)),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: CustomTableCell(
+              Text(user.subject, style: const TextStyle(fontSize: 13)),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: CustomTableCell(
+              Text(user.category, style: const TextStyle(fontSize: 13)),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: CustomTableCell(CustomStatusBadge(user.priority)),
+          ),
+          Expanded(
+            flex: 2,
+            child: CustomTableCell(CustomStatusBadge(user.status)),
+          ),
+          Expanded(
+            flex: 2,
+            child: CustomTableCell(CustomStatusBadge(user.createdOn)),
+          ),
+          Expanded(flex: 2, child: CustomTableCell(CustomActionButtons())),
+        ],
+      ),
+    );
+  }
+}
 
-// class _TableCell extends StatelessWidget {
-//   final Widget child;
-
-//   const _TableCell(this.child);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(padding: const EdgeInsets.all(16.0), child: child);
-//   }
-// }
-
-// class _StatusBadge extends StatelessWidget {
-//   final String status;
-
-//   const _StatusBadge(this.status);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final isActive = status == 'Active';
-//     return Text(
-//       status,
-//       style: TextStyle(
-//         color: isActive ? Colors.green : Colors.red,
-//         fontWeight: FontWeight.w500,
-//       ),
-//     );
-//   }
-// }
-
-// class _ActionButtons extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisSize: MainAxisSize.min,
-//       children: [
-//         IconButton(
-//           icon: Icon(Icons.edit_outlined, color: Colors.grey.shade600),
-//           onPressed: () {},
-//           padding: EdgeInsets.zero,
-//           constraints: const BoxConstraints(),
-//           iconSize: 20,
-//         ),
-//         const SizedBox(width: 8),
-//         ElevatedButton(
-//           onPressed: () {},
-//           style: ElevatedButton.styleFrom(
-//             backgroundColor: const Color(0xffED1C24),
-//             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-//             minimumSize: Size.zero,
-//             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-//           ),
-//           child: const Text(
-//             'Deactivate',
-//             style: TextStyle(
-//               color: Colors.white,
-//               fontSize: 12,
-//               fontWeight: FontWeight.w600,
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-// class _SubscriptionData {
-//   final String transactionId;
-//   final String user;
-//   final String plan;
-//   final String paymentMethod;
-//   final String status;
-//   final String startDate;
-//   final String expiryDate;
-
-//   _SubscriptionData(
-//     this.transactionId,
-//     this.user,
-//     this.plan,
-//     this.paymentMethod,
-//     this.status,
-//     this.startDate,
-//     this.expiryDate,
-//   );
-// }
+final _users = [
+  SupportTicketModel(
+    ticketId: 'TK-1001',
+    user: 'Mike Johnson',
+    subject: 'Payment not reflecting in account',
+    category: 'Payment issue',
+    priority: 'Active',
+    status: 'Open',
+    createdOn: '01 Sep 2025',
+  ),
+];
