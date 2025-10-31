@@ -1,6 +1,7 @@
 import 'package:cageconnectdashboard/models/support_ticket_model.dart';
 import 'package:cageconnectdashboard/screens/responsive/responsive.dart';
 import 'package:cageconnectdashboard/screens/view/dashboard/support/support_tablet_view.dart';
+import 'package:cageconnectdashboard/utils/colors.dart';
 import 'package:cageconnectdashboard/widgets/custom_action_button.dart';
 import 'package:cageconnectdashboard/widgets/custom_filter_pill.dart';
 import 'package:cageconnectdashboard/widgets/custom_status.dart';
@@ -203,9 +204,17 @@ class _TabletTableRow extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: CustomTableCell(CustomStatusBadge(user.createdOn)),
+            child: CustomTableCell(
+              Text(
+                user.createdOn,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: AppColors.textColor,
+                ),
+              ),
+            ),
           ),
-          Expanded(flex: 2, child: CustomTableCell(CustomActionButtons())),
+          Expanded(flex: 2, child: Icon(Icons.delete_outline)),
         ],
       ),
     );
