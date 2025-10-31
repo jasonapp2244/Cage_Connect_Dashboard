@@ -57,10 +57,19 @@ class _EventTabletViewState extends State<EventTabletView> {
                   child: Row(
                     children: [
                       const Text(
-                        'Sort by: Latest',
+                        'Sort by: ',
                         style: TextStyle(
                           fontSize: 14,
                           color: Color(0xff060606),
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      const Text(
+                        'Latest',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xff060606),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(width: 8),

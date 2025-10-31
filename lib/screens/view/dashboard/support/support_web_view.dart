@@ -64,10 +64,19 @@ class _SupportWebViewState extends State<SupportWebView> {
                   child: Row(
                     children: [
                       const Text(
-                        'Sort by: Latest',
+                        'Sort by: ',
                         style: TextStyle(
                           fontSize: 14,
                           color: Color(0xff060606),
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      const Text(
+                        'Latest',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xff060606),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -214,7 +223,10 @@ class _TabletTableRow extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(flex: 2, child: Icon(Icons.delete_outline)),
+          Expanded(
+            flex: 2,
+            child: Icon(Icons.delete_outline, color: AppColors.primaryColor),
+          ),
         ],
       ),
     );
