@@ -66,8 +66,8 @@ class SubscriptionsWebView extends StatelessWidget {
                     // Sort Dropdown
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
+                        horizontal: 14,
+                        vertical: 8,
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey.shade300),
@@ -75,11 +75,19 @@ class SubscriptionsWebView extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          const Text(
-                            'Sort by: Latest',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xff060606),
+                          RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xff060606),
+                              ),
+                              children: [
+                                TextSpan(text: 'Sort by: '),
+                                TextSpan(
+                                  text: 'Latest',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -144,7 +152,7 @@ class SubscriptionsWebView extends StatelessWidget {
                     4: FlexColumnWidth(1.5),
                     5: FlexColumnWidth(1.5),
                     6: FlexColumnWidth(1.5),
-                    7: FlexColumnWidth(1.5),
+                    7: FlexColumnWidth(2),
                   },
                   children: [
                     // Table Header
@@ -156,13 +164,13 @@ class SubscriptionsWebView extends StatelessWidget {
                         ),
                       ),
                       children: const [
-                        CustomHeaderCell(text: 'Txn ID'),
+                        CustomHeaderCell(text: 'Transaction ID'),
                         CustomHeaderCell(text: 'User'),
-                        CustomHeaderCell(text: 'Plan'),
-                        CustomHeaderCell(text: 'Payment'),
+                        CustomHeaderCell(text: 'Subscription Plan'),
+                        CustomHeaderCell(text: 'Payment Method'),
                         CustomHeaderCell(text: 'Status'),
-                        CustomHeaderCell(text: 'Start'),
-                        CustomHeaderCell(text: 'Expiry'),
+                        CustomHeaderCell(text: 'Start Date'),
+                        CustomHeaderCell(text: 'Expiry Date'),
                         CustomHeaderCell(text: 'Action'),
                       ],
                     ),
@@ -244,7 +252,7 @@ class SubscriptionsWebView extends StatelessWidget {
               CustomTableCell(CustomStatusBadge(sub.status)),
               CustomTableCell(Text(sub.startDate)),
               CustomTableCell(Text(sub.expiryDate)),
-              CustomTableCell(CustomActionButtons()),
+              CustomTableCell(CustomActionButtons(isDeactivate: true)),
             ],
           ),
         )

@@ -64,11 +64,19 @@ class _EventWebViewState extends State<EventWebView> {
                   ),
                   child: Row(
                     children: [
-                      const Text(
-                        'Sort by: Latest',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xff060606),
+                      RichText(
+                        text: const TextSpan(
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xff060606),
+                          ),
+                          children: [
+                            TextSpan(text: 'Sort by: '),
+                            TextSpan(
+                              text: 'Latest',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(width: 8),
