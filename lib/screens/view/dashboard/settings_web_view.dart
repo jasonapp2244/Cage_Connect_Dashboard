@@ -758,7 +758,8 @@ class _SettingsWebViewState extends State<SettingsWebView> {
       children: [
         // Payment Gateways Connected Card
         Container(
-          width: 350,
+          width: 450,
+          height: 280,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: const Color(0xFFF0F0F0),
@@ -769,11 +770,7 @@ class _SettingsWebViewState extends State<SettingsWebView> {
             children: [
               const Text(
                 'Payment Gateways Connected',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: TextStyle(fontSize: 18, color: Color(0xff6C6C6C)),
               ),
               const SizedBox(height: 24),
               _buildPaymentGatewayItem(name: 'Stripe', buttonText: 'Connect'),
@@ -796,41 +793,33 @@ class _SettingsWebViewState extends State<SettingsWebView> {
     required String name,
     required String buttonText,
   }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            // Handle payment gateway connection
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text('Connecting to $name...')));
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xffED1C24),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
             ),
           ),
-          child: Text(
+          Text(
             buttonText,
             style: const TextStyle(
-              color: Colors.white,
+              color: Colors.red,
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
