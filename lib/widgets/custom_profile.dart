@@ -38,7 +38,7 @@ class CustomProfileWidget extends StatelessWidget {
             child: Icon(
               notificationIcon,
               color: notificationIconColor,
-              size: 16,
+              size: 20,
             ),
           ),
 
@@ -49,7 +49,7 @@ class CustomProfileWidget extends StatelessWidget {
             children: <Widget>[
               // Avatar
               CircleAvatar(
-                radius: 25,
+                radius: 20,
                 backgroundImage: AssetImage(avatarImagePath),
               ),
 
