@@ -15,21 +15,24 @@ class CustomProfileWidget extends StatelessWidget {
     required this.userEmail,
     required this.avatarImagePath,
     this.notificationIcon = Icons.notifications_none,
-    this.notificationIconColor = Colors.black54, // Default color
+    this.notificationIconColor = Colors.black54,
   });
 
   @override
   Widget build(BuildContext context) {
     var adaptive = Adaptive(context);
+
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: Row(
-        mainAxisSize: MainAxisSize.min, // Keep the row content snug
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment:
+            CrossAxisAlignment.center, // ✅ vertically center everything
         children: <Widget>[
           Container(
             padding: adaptive.paddingOnly(left: 2, top: 2, right: 2, bottom: 2),
             decoration: BoxDecoration(
-              color: AppColors.bgColor, // Light gray background
+              color: AppColors.bgColor,
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -42,36 +45,36 @@ class CustomProfileWidget extends StatelessWidget {
           adaptive.horizontalSpace(8),
 
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center, // ✅ important
             children: <Widget>[
               // Avatar
               CircleAvatar(
                 radius: 25,
-
                 backgroundImage: AssetImage(avatarImagePath),
               ),
 
-              adaptive.horizontalSpace(4),
+              adaptive.horizontalSpace(6),
 
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, // ✅ align text left
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // ✅ center vertically with avatar
                 children: <Widget>[
-                  // Name
                   Text(
-                    userName, // Use the parameter
+                    userName,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: adaptive.fontSize(14),
-
                       color: Colors.black,
                     ),
                   ),
-                  // Email
                   Text(
-                    userEmail, // Use the parameter
+                    userEmail,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: adaptive.fontSize(14),
-                      color: Color(0xff6C6C6C),
+                      fontSize: adaptive.fontSize(12),
+                      color: const Color(0xff6C6C6C),
                     ),
                   ),
                 ],
