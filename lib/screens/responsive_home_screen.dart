@@ -36,7 +36,7 @@ class ResponsiveHomeScreen extends StatelessWidget {
       ResponsiveEventsScreen(),
       ResponsiveSubscriptionsScreen(),
       SupportWebView(),
-      ResponsiveSettingsScreen(),
+      const ResponsiveSettingsScreen(),
     ];
 
     final width = MediaQuery.of(context).size.width;
@@ -55,7 +55,6 @@ class ResponsiveHomeScreen extends StatelessWidget {
       // ✅ AppBar (only for mobile)
       appBar: (isMobile || isTablet)
           ? AppBar(
-              actionsPadding: EdgeInsets.only(right: 16),
               backgroundColor: AppColors.cardColor,
               elevation: 0,
               leading: Builder(
@@ -68,24 +67,35 @@ class ResponsiveHomeScreen extends StatelessWidget {
               ),
               title: Text(
                 pageTitles[provider.selectedIndex],
-                style: const TextStyle(
-                  fontSize: 32,
+                style: TextStyle(
+                  fontSize: isMobile ? 20 : 32,
                   fontWeight: FontWeight.w900,
                   color: AppColors.textColor,
                 ),
               ),
               centerTitle: true,
               actions: [
-                CustomSearchBar(
-                  hintText: 'Search by name, email, or role…',
-                  width: 300,
-                ),
-                const SizedBox(width: 20),
-                const CustomProfileWidget(
-                  userName: 'Jamiee Dunn',
-                  userEmail: 'Jamie Dun',
-                  avatarImagePath: 'assets/images/jamie.png',
-                ),
+                if (isMobile)
+                  const Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: CustomProfileWidget(
+                      userName: 'Jamiee Dunn',
+                      userEmail: 'Jamie Dun',
+                      avatarImagePath: 'assets/images/jamie.png',
+                    ),
+                  ),
+                if (isTablet) ...[
+                  CustomSearchBar(
+                    hintText: 'Search by name, email, or role…',
+                    width: 300,
+                  ),
+                  const SizedBox(width: 20),
+                  const CustomProfileWidget(
+                    userName: 'Jamiee Dunn',
+                    userEmail: 'Jamie Dun',
+                    avatarImagePath: 'assets/images/jamie.png',
+                  ),
+                ],
               ],
             )
           : null,

@@ -37,8 +37,6 @@ class _UsersMobileViewState extends State<UsersMobileView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeaderSection(adaptive),
-            const SizedBox(height: 20),
             _buildFilterSection(),
             const SizedBox(height: 16),
             _buildSortSection(adaptive),
